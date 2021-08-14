@@ -9,12 +9,14 @@ var userInput = [];
 
 const charString = ["special", "numerical", "uppercase", "lowercase"]
 
+var password = "";
+
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
   var passwordText = document.querySelector("#password");
-
-      passwordText.value = password;
+  password = generatePassword();
+  
+  passwordText.value = password;
  
 
 } 
@@ -24,38 +26,37 @@ generateBtn.addEventListener("click", writePassword);
 
 
 function generatePassword(){
-  passwordCharset = "";
-  let password = "";
+  var passwordLength = "" ;
   
-  var passwordLength  = window.prompt("Please enter the number of characters you want for your password. It must be between 8 and 128 characters");
+  
+   passwordLength  = window.prompt("Please enter the number of characters you want for your password. It must be between 8 and 128 characters");
    lowercase = confirm("Do you want lowercases?");
     if (lowercase) {
-      passwordCharset += charString.lowercase;
+      passwordLength += charString[3];
     };
 
    uppercase = window.confirm("Do you want uppercases?");
     if (uppercase) {
-      passwordCharset =+ charString.uppercase;
+      passwordLength =+ charString[2];
     };
     
    numerical = window.confirm("Do you want numbers?");
     if (numerical) {
-      passwordCharset =+ charString.numerical;
+      passwordLength =+ charString[1];
     };
 
    special = window.confirm("Do you want special characters?");
     if (special) {
-      passwordCharset =+ charString.special;
+      passwordLength =+ charString[0];
     };
 
-    var passwordGenerated = [""];
+    var password = "";
     for (let i = 0; i < passwordLength; i++) {
-      passwordGenerated += passwordCharset[Math.floor(Math.random() * passwordCharset.passwordLength)]
+      var index = Math.floor(Math.random() * userInput.length);
+      password += userInput[index]
     }
-    return passwordGenerated;
+    return password;
   
   
 }
 
-console.log(generatePassword);
-console.log(writePassword)
