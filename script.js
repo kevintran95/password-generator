@@ -5,18 +5,15 @@ var special = ["!", "#", "$", "%", "&", "‘", "(", ")", "*", "+", ",", "-", "."
 var numerical = [0,1,2,3,4,5,6,7,8,9];
 var uppercase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 var lowercase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-var userInput = [];
 
-const charString = ["special", "numerical", "uppercase", "lowercase"]
-
-var password = "";
+const inputArray = ["special", "numerical", "uppercase", "lowercase"]
 
 // Write password to the #password input
 function writePassword() {
+  var password = generatePassword();
   var passwordText = document.querySelector("#password");
-  password = generatePassword();
-  
-  passwordText.value = password;
+
+      passwordText.value = password;
  
 
 } 
@@ -26,37 +23,38 @@ generateBtn.addEventListener("click", writePassword);
 
 
 function generatePassword(){
-  var passwordLength = "" ;
+  passwordCharset = "";
   
-  
-   passwordLength  = window.prompt("Please enter the number of characters you want for your password. It must be between 8 and 128 characters");
+  var passwordLength  = window.prompt("Please enter the number of characters you want for your password. It must be between 8 and 128 characters");
    lowercase = confirm("Do you want lowercases?");
     if (lowercase) {
-      passwordLength += charString[3];
+      passwordCharset += inputArray.lowercase;
     };
 
    uppercase = window.confirm("Do you want uppercases?");
     if (uppercase) {
-      passwordLength =+ charString[2];
+      passwordCharset =+ inputArray.uppercase;
     };
     
    numerical = window.confirm("Do you want numbers?");
     if (numerical) {
-      passwordLength =+ charString[1];
+      passwordCharset =+ inputArray.numerical;
     };
 
    special = window.confirm("Do you want special characters?");
     if (special) {
-      passwordLength =+ charString[0];
+      passwordCharset =+ inputArray.special;
     };
 
-    var password = "";
+    var passwordGenerated = [""];
     for (let i = 0; i < passwordLength; i++) {
-      var index = Math.floor(Math.random() * userInput.length);
-      password += userInput[index]
+      passwordGenerated += passwordCharset[Math.floor(Math.random() * passwordCharset.passwordLength)]
     }
-    return password;
+    return passwordGenerated;
   
   
 }
 
+
+console.log(generatePassword);
+console.log(writePassword)
