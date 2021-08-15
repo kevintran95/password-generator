@@ -6,7 +6,12 @@ var numerical = [0,1,2,3,4,5,6,7,8,9];
 var uppercase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 var lowercase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
-const inputArray = ["special", "numerical", "uppercase", "lowercase"]
+var charString = ["uppercase", "lowercase", "numerical", "special"];
+
+
+var password = "";
+var userInput = "";
+
 
 // Write password to the #password input
 function writePassword() {
@@ -22,39 +27,48 @@ function writePassword() {
 generateBtn.addEventListener("click", writePassword); 
 
 
-function generatePassword(){
-  passwordCharset = "";
-  
-  var passwordLength  = window.prompt("Please enter the number of characters you want for your password. It must be between 8 and 128 characters");
-   lowercase = confirm("Do you want lowercases?");
-    if (lowercase) {
-      passwordCharset += inputArray.lowercase;
-    };
+function generatePassword() {
+  var passwordLength = 0
+  while ((passwordLength < 8 || passwordLength > 128) || Number.isInteger(passwordLength) === 
+false) {
+  passwordLength = parseInt(prompt("Please enter the number of characters you want for your password. It must be between 8 and 128 characters"));
+  }
 
-   uppercase = window.confirm("Do you want uppercases?");
-    if (uppercase) {
-      passwordCharset =+ inputArray.uppercase;
-    };
-    
-   numerical = window.confirm("Do you want numbers?");
-    if (numerical) {
-      passwordCharset =+ inputArray.numerical;
-    };
+  var upperC = !true
+  var lowerC = !true
+  var numberC = !true
+  var symbolC = !true
 
-   special = window.confirm("Do you want special characters?");
-    if (special) {
-      passwordCharset =+ inputArray.special;
-    };
+  while (true) {
+    upperC = confirm("Do you want uppercase characters?");
+    lowerC = confirm("Do you want lowercase characters?");
+    numberC = confirm("Do you want numerical characters?");
+    symbolC = confirm("Do you want special characters? ");
+    break;
+  }
 
-    var passwordGenerated = [""];
-    for (let i = 0; i < passwordLength; i++) {
-      passwordGenerated += passwordCharset[Math.floor(Math.random() * passwordCharset.passwordLength)]
-    }
-    return passwordGenerated;
   
-  
+
+  upperC && (userInput += charString.uppercase)
+
+  lowerC && (userInput += charString.lowercase)
+
+  numberC && (userInput += charString.numerical)
+
+  symbolC && (userInput += charString.special)
+
+  var passwordGen = "";
+
+  for (var i = 0; i < passwordLength; i++) {
+    var index = Math.floor(Math.random() * userInput.length);
+    passwordGen += userInput[index]
+  }
+
+  return passwordGen
+
 }
 
-
-console.log(generatePassword);
+console.log(generatePassword)
 console.log(writePassword)
+
+
